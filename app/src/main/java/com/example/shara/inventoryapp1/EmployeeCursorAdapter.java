@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 
 import com.example.shara.inventoryapp1.data.EmployeeContract;
 import com.example.shara.inventoryapp1.data.EmployeeContract.EmployeeEntry;
+
+import static android.widget.Toast.*;
 
 public class EmployeeCursorAdapter extends CursorAdapter {
 
@@ -46,6 +49,9 @@ public class EmployeeCursorAdapter extends CursorAdapter {
         String productName = cursor.getString(nameColumnIndex);
         int productPrice =cursor.getInt(priceColumnIndex);
         int productQuantity =cursor.getInt(quantityColumnIndex);
+        //Toast.makeText(EmployeeCursorAdapter.this,productPrice, LENGTH_SHORT).show();
+        Log.d("EmployeeCursorAdapter",priceColumnIndex+": value of price from database");
+        Log.d("EmployeeCursorAdapter",productPrice+": value of price from database after converting int");
         String supplierName =cursor.getString(supnameColumnIndex);
         String suplierContact =cursor.getString(supcontactColumnIndex);
         nameTextView.setText(productName);
@@ -75,8 +81,8 @@ public class EmployeeCursorAdapter extends CursorAdapter {
                             null);
 
                 } else {
-                    Toast.makeText(context, "quantity cannot be zero",
-                            Toast.LENGTH_SHORT).show();
+                    makeText(context, "quantity cannot be zero",
+                            LENGTH_SHORT).show();
                 }
             }
         });

@@ -3,6 +3,7 @@ package com.example.shara.inventoryapp1;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -146,6 +147,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         if (mCurrentProUri == null &&
                 TextUtils.isEmpty(nameString) && TextUtils.isEmpty(priceString) &&
                 TextUtils.isEmpty(quantityString) && TextUtils.isEmpty(supNameString) && TextUtils.isEmpty(supContString)) {
+            Toast.makeText(this, "Enter Details of respected fields,Product shoud have details",
+                    Toast.LENGTH_SHORT).show();
 
             return;
         }
@@ -161,6 +164,13 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             quantity = Integer.parseInt(quantityString);
         }
         values.put(EmployeeEntry.COLUMN_QUANTITY, quantity);
+
+
+        if (!TextUtils.isEmpty(priceString)) {
+           Toast.makeText(this,priceString+"price cannot be empty,please enter price",Toast.LENGTH_SHORT).show();
+
+        }
+
         if (mCurrentProUri == null) {
             Uri newUri = getContentResolver().insert(EmployeeEntry.CONTENT_URI, values);
             // Show a toast message depending on whether or not the insertion was successful.
