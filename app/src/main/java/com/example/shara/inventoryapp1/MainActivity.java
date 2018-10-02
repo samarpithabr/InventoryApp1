@@ -1,5 +1,4 @@
 package com.example.shara.inventoryapp1;
-
 import android.app.LoaderManager;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -19,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
 import com.example.shara.inventoryapp1.data.EmployeeContract.EmployeeEntry;
 import com.example.shara.inventoryapp1.data.EmployeedbHelper;
 
