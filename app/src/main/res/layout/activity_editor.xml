@@ -7,67 +7,87 @@
     android:padding="@dimen/activity_margin"
     tools:context=".EditorActivity">
 
-    <!-- Overview category -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            style="@style/CategoryStyle"
-            android:text="@string/category_overview" />
-
         <EditText
             android:id="@+id/edit_product_name"
-            style="@style/EditorFieldStyle"
+           android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:hint="PRODUCT_NAME"
             android:inputType="textCapWords" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/container_measurement"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            style="@style/CategoryStyle"
-            android:text="@string/price1" />
-
-        <RelativeLayout
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:paddingLeft="4dp">
 
             <EditText
                 android:id="@+id/edit_price"
-                style="@style/EditorFieldStyle"
+               android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:hint="@string/prce"
                 android:inputType="number" />
 
             <TextView
                 android:id="@+id/label_dollar_units"
-                style="@style/EditorUnitsStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/dollar" />
-        </RelativeLayout>
+        </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/increase_button"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/plus"
+
+            />
+
+        <EditText
+            android:id="@+id/edit_quantity_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:paddingRight="65dp"
+            android:hint="QUANTITY"/>
+
+
+
+            <Button
+                android:id="@+id/decrease_button"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/minus"
+
+                 />
+
+
     </LinearLayout>
-
-    <EditText
-        android:id="@+id/edit_quantity_name"
-        style="@style/EditorFieldStyle"
-        android:hint="@string/quantity"
-        android:inputType="textCapWords" />
-
     <EditText
         android:id="@+id/edit_supplier_name"
-        style="@style/EditorFieldStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:hint="@string/supplier_name"
         android:inputType="textCapWords" />
 
     <EditText
         android:id="@+id/edit_supplier_contact"
-        style="@style/EditorFieldStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:hint="@string/supplier_contact"
         android:inputType="textCapWords" />
+    <Button
+        android:id="@+id/delete_pro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DELETE" />
+
+    <Button
+        android:id="@+id/contact_supplier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact Supplier" />
 </LinearLayout>

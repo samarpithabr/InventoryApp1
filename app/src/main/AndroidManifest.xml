@@ -16,7 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EditorActivity"></activity>
+        <activity android:name=".EditorActivity">
+
+        </activity>
+        <provider
+            android:name=".data.InventoryProvider"
+            android:authorities="com.example.shara.inventoryapp1"
+            android:exported="false" />
     </application>
 
 </manifest>
