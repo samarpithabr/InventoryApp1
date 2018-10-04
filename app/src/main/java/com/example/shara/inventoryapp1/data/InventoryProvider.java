@@ -74,14 +74,14 @@ public class InventoryProvider extends ContentProvider {
 
     private Uri insertPet(Uri uri, ContentValues values) {
         String name = values.getAsString(EmployeeContract.EmployeeEntry.COLUMN_PRODUCT_NAME);
-            try {
-                if ((name == null) || (TextUtils.isEmpty(name)))
+        try {
+            if ((name == null) || (TextUtils.isEmpty(name)))
                 throw new IllegalArgumentException("PRODUCT requires a name");
 
-            } catch (Exception e) {
-                Toast.makeText(getContext(), "Please Enter proper Name" , LENGTH_SHORT).show();
-            }
-        
+        } catch (Exception e) {
+            Toast.makeText(getContext(), "Please Enter proper Name" , LENGTH_SHORT).show();
+        }
+
         Integer price = values.getAsInteger(EmployeeContract.EmployeeEntry.COLOMN_PRICE);
         if (price == null) {
             throw new IllegalArgumentException("Product requires valid Price");

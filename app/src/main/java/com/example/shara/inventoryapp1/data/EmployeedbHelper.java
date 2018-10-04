@@ -22,7 +22,7 @@ public class EmployeedbHelper extends SQLiteOpenHelper {
                 + EmployeeEntry.COLUMN_PRODUCT_NAME + " TEXT NOT NULL, "
                 + EmployeeEntry.COLOMN_PRICE + " INTEGER NOT NULL, "
                 + EmployeeEntry.COLUMN_QUANTITY + " INTEGER NOT NULL DEFAULT 1, "
-                + EmployeeEntry.COLUMN_SUPPLIER_NAME + " TEXT NOT NULL,"
+                + EmployeeEntry.COLUMN_SUPPLIER_NAME + " TEXT NOT NULL, "
                 + EmployeeEntry.COLUMN_SUPPLIER_CONTACT + " TEXT NOT NULL );";
 
         // Execute the SQL statement

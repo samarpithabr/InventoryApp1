@@ -145,7 +145,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         }
 
-
         if (TextUtils.isEmpty(nameString)) {
             mEditProductName.setError(getString(R.string.product));
             return;
@@ -229,7 +228,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             // Respond to a click on the "Save" menu option
             case R.id.action_save:
                 savePro();
-
                 return true;
             // Respond to a click on the "Delete" menu option
             case R.id.action_delete:
@@ -274,7 +272,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                         finish();
                     }
                 };
-   showUnsavedChangesDialog(discardButtonClickListener);
+        showUnsavedChangesDialog(discardButtonClickListener);
     }
 
     @Override
