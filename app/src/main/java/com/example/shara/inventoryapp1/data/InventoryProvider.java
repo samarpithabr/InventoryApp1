@@ -1,19 +1,20 @@
 package com.example.shara.inventoryapp1.data;
 
-import android.content.ContentProvider;
-import android.content.ContentUris;
-import android.content.ContentValues;
-import android.content.UriMatcher;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
-import android.text.TextUtils;
-import android.util.Log;
-import android.widget.Toast;
+        import android.content.ContentProvider;
+        import android.content.ContentUris;
+        import android.content.ContentValues;
+        import android.content.UriMatcher;
+        import android.database.Cursor;
+        import android.database.sqlite.SQLiteDatabase;
+        import android.net.Uri;
+        import android.text.TextUtils;
+        import android.util.Log;
+        import android.widget.Toast;
 
-import com.example.shara.inventoryapp1.R;
+        import com.example.shara.inventoryapp1.EditorActivity;
+        import com.example.shara.inventoryapp1.R;
 
-import static android.widget.Toast.LENGTH_SHORT;
+        import static android.widget.Toast.LENGTH_SHORT;
 
 public class InventoryProvider extends ContentProvider {
 
@@ -86,9 +87,12 @@ public class InventoryProvider extends ContentProvider {
         if (price == null) {
             throw new IllegalArgumentException("Product requires valid Price");
         }
+
         Integer quantity = values.getAsInteger(EmployeeContract.EmployeeEntry.COLUMN_QUANTITY);
-        if (quantity != null && quantity < 1) {
-            throw new IllegalArgumentException("Product requires valid Quantity");
+        if (quantity == 0 || quantity < 1) {
+
+        throw new IllegalArgumentException("Product requires valid Quantity");
+
         }
         String supplierName = values.getAsString(EmployeeContract.EmployeeEntry.COLUMN_SUPPLIER_NAME);
         if (supplierName == null) {
