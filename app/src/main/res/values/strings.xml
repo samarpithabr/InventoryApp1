@@ -16,37 +16,18 @@
     <string name="supplier_name">SUPPLIER NAME</string>
     <string name="supplier_contact">SUPPLIER_CONTACT</string>
     <string name="empty_view_title_text">It\'s a bit lonely here...</string>
-
-    <!-- Subtitle text for the empty view that prompts the user to add a pet [CHAR LIMIT=50] -->
     <string name="empty_view_subtitle_text">Start Adding Product Details</string>
-    <!-- Title for the activity to add a new pet [CHAR LIMIT=20] -->
     <string name="editor_activity_title_new_product">Add a Product</string>
-
-    <!-- Title for the activity to edit an existing pet [CHAR LIMIT=20] -->
     <string name="editor_activity_title_edit_product">Edit Product</string>
     <string name="editor_update_EMP_failed">Update of Product Failed</string>
     <string name="editor_update_EMP_successful">Update of Product Successfull</string>
     <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
-
-    <!-- Dialog button text for the option to discard a user's changes [CHAR LIMIT=20] -->
     <string name="discard">Discard</string>
-
-    <!-- Dialog button text for the option to keep editing the current pet [CHAR LIMIT=20] -->
     <string name="keep_editing">Keep Editing</string>
-
-    <!-- Toast message in editor when current pet was successfully deleted [CHAR LIMIT=NONE] -->
     <string name="editor_delete_product_successful">Product deleted</string>
-
-    <!-- Toast message in editor when current pet has failed to be deleted [CHAR LIMIT=NONE] -->
     <string name="editor_delete_product_failed">Error with deleting product</string>
-
-    <!-- Dialog message to ask the user to confirm deleting the current pet [CHAR LIMIT=NONE] -->
     <string name="delete_dialog_msg">Delete this Product?</string>
-
-    <!-- Dialog button text for the option to confirm deleting the current pet [CHAR LIMIT=20] -->
     <string name="delete">Delete</string>
-
-    <!-- Dialog button text for the option to cancel deletion of the current pet [CHAR LIMIT=20] -->
     <string name="cancel">Cancel</string>
     <string name="editor_insert_EMP_failed">insert Failed</string>
     <string name="editor_insert_Emp_successful">insert success</string>
@@ -54,6 +35,12 @@
     <string name="editor_enter_quantity">Quantity cannot be null please enter quantity</string>
     <string name="editor_quantity_empty">enter quantity</string>
     <string name="editor_quantity_zero">quanity cannot be zero</string>
-
-
+    <string name="enter">Enter Details of respected fields,Product shoud have details</string>
+    <string name="product">Enter Product Name</string>
+    <string name="pricepro">Enter Price of product</string>
+    <string name="quantityof">Enter Quantity</string>
+    <string name="Supplier">Enter Supplier Name</string>
+    <string name="sup_contact">Enter supplier contact</string>
+    <string name="quantity_zero">quantity cannot be zero</string>
+    <string name="editor_inser_EMP_failed">no proper name</string>
 </resources>

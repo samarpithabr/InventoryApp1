@@ -3,69 +3,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FF4081"
     android:orientation="vertical"
     android:padding="@dimen/activity_margin"
     tools:context=".EditorActivity">
 
+    <EditText
+        android:id="@+id/edit_product_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="PRODUCT_NAME"
+        android:inputType="textCapWords" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:paddingLeft="4dp">
+
         <EditText
-            android:id="@+id/edit_product_name"
-           android:layout_height="wrap_content"
+            android:id="@+id/edit_price"
             android:layout_width="wrap_content"
-            android:hint="PRODUCT_NAME"
-            android:inputType="textCapWords" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:paddingLeft="4dp">
+            android:hint="@string/prce"
+            android:inputType="number" />
 
-            <EditText
-                android:id="@+id/edit_price"
-               android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="@string/prce"
-                android:inputType="number" />
-
-            <TextView
-                android:id="@+id/label_dollar_units"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/dollar" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/label_dollar_units"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dollar"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <Button
             android:id="@+id/increase_button"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:background="@drawable/plus"
-
-            />
+            android:background="@drawable/plus" />
 
         <EditText
             android:id="@+id/edit_quantity_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textCapWords"
-            android:paddingRight="65dp"
-            android:hint="QUANTITY"/>
+            android:hint="QUANTITY"
+            android:inputType="number"
+            android:paddingRight="65dp" />
 
+        <Button
+            android:id="@+id/decrease_button"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/minus"
 
-
-            <Button
-                android:id="@+id/decrease_button"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:background="@drawable/minus"
-
-                 />
+            />
 
 
     </LinearLayout>
+
     <EditText
         android:id="@+id/edit_supplier_name"
         android:layout_width="wrap_content"
@@ -78,16 +79,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/supplier_contact"
-        android:inputType="textCapWords" />
+        android:inputType="number" />
+
     <Button
         android:id="@+id/delete_pro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#AA00FF"
         android:text="DELETE" />
 
     <Button
         android:id="@+id/contact_supplier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#6D4C41"
         android:text="Contact Supplier" />
 </LinearLayout>

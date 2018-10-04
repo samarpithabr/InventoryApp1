@@ -3,7 +3,6 @@ package com.example.shara.inventoryapp1;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.shara.inventoryapp1.data.EmployeeContract;
 import com.example.shara.inventoryapp1.data.EmployeeContract.EmployeeEntry;
 
 
@@ -34,7 +34,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private boolean mProHasChanged = false;
     private int currentQuantity;
     private static final int EXISTING_EMP_LOADER = 0;
-
 
     private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
         @Override
@@ -54,7 +53,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             setTitle(getString(R.string.editor_activity_title_new_product));
             invalidateOptionsMenu();
         } else {
-
             setTitle(getString(R.string.editor_activity_title_edit_product));
             getLoaderManager().initLoader(EXISTING_EMP_LOADER, null, this);
         }
@@ -74,9 +72,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         incbtn.setOnTouchListener(mTouchListener);
         decbtn.setOnTouchListener(mTouchListener);
         Button delete = (Button) findViewById(R.id.delete_pro);
-
-
-        // Setting an OnClickListener to initiate the delettion of an item once clicked
         delete.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,7 +79,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             }
         });
 
-        // Increase quantity by 1
         incbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,8 +94,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             }
         });
 
-        // Decrease quantity by 1 and making sure quantity is not empty and
-        // does not equal to "0" before proceeding with decreasing it.
         decbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,7 +104,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                     return;
                 } else {
                     currentQuantity = Integer.parseInt(quantity);
-                    if (currentQuantity == 0) {
+                    if (currentQuantity == 1) {
                         Toast.makeText(EditorActivity.this,
                                 R.string.editor_quantity_zero, Toast.LENGTH_SHORT).show();
                     } else {
@@ -128,9 +120,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             public void onClick(View v) {
                 String phoneNumber = mEditSupplierContact.getText().toString().trim();
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("Tel:" + phoneNumber));
+
                 if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
+                    Intent dialIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber));
+                    startActivity(dialIntent);
                 }
             }
         });
@@ -147,9 +140,34 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         if (mCurrentProUri == null &&
                 TextUtils.isEmpty(nameString) && TextUtils.isEmpty(priceString) &&
                 TextUtils.isEmpty(quantityString) && TextUtils.isEmpty(supNameString) && TextUtils.isEmpty(supContString)) {
-            Toast.makeText(this, "Enter Details of respected fields,Product shoud have details",
+            Toast.makeText(this, R.string.enter,
                     Toast.LENGTH_SHORT).show();
 
+        }
+
+
+        if (TextUtils.isEmpty(nameString)) {
+            mEditProductName.setError(getString(R.string.product));
+            return;
+        }
+
+        if (TextUtils.isEmpty(priceString)) {
+            mEditPrice.setError(getString(R.string.pricepro));
+            return;
+        }
+
+        if (TextUtils.isEmpty(quantityString)) {
+            mEditQuantity.setError(getString(R.string.quantityof));
+            return;
+        }
+
+        if (TextUtils.isEmpty(supNameString)) {
+            mEditSupplierName.setError(getString(R.string.Supplier));
+            return;
+        }
+
+        if (TextUtils.isEmpty(supContString)) {
+            mEditSupplierContact.setError(getString(R.string.sup_contact));
             return;
         }
 
@@ -165,43 +183,30 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         }
         values.put(EmployeeEntry.COLUMN_QUANTITY, quantity);
 
-
-        if (!TextUtils.isEmpty(priceString)) {
-           Toast.makeText(this,priceString+"price cannot be empty,please enter price",Toast.LENGTH_SHORT).show();
-
-        }
-
         if (mCurrentProUri == null) {
             Uri newUri = getContentResolver().insert(EmployeeEntry.CONTENT_URI, values);
-            // Show a toast message depending on whether or not the insertion was successful.
             if (newUri == null) {
-                // If the new content URI is null, then there was an error with insertion.
                 Toast.makeText(this, getString(R.string.editor_insert_EMP_failed),
                         Toast.LENGTH_SHORT).show();
             } else {
-                // Otherwise, the insertion was successful and we can display a toast.
                 Toast.makeText(this, getString(R.string.editor_insert_Emp_successful),
                         Toast.LENGTH_SHORT).show();
             }
         } else {
             int rowsAffected = getContentResolver().update(mCurrentProUri, values, null, null);
-            // Show a toast message depending on whether or not the update was successful.
             if (rowsAffected == 0) {
-                // If no rows were affected, then there was an error with the update.
                 Toast.makeText(this, getString(R.string.editor_update_EMP_failed),
                         Toast.LENGTH_SHORT).show();
             } else {
-                // Otherwise, the update was successful and we can display a toast.
                 Toast.makeText(this, getString(R.string.editor_update_EMP_successful),
                         Toast.LENGTH_SHORT).show();
             }
         }
+        finish();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu options from the res/menu/menu_editor.xml file.
-        // This adds menu items to the app bar.
         getMenuInflater().inflate(R.menu.menu_editor, menu);
         return true;
     }
@@ -224,8 +229,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             // Respond to a click on the "Save" menu option
             case R.id.action_save:
                 savePro();
-                // Exit activity
-                finish();
+
                 return true;
             // Respond to a click on the "Delete" menu option
             case R.id.action_delete:
@@ -253,9 +257,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * This method is called when the back button is pressed.
-     */
+
     @Override
     public void onBackPressed() {
 
@@ -264,8 +266,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             return;
         }
 
-        // Otherwise if there are unsaved changes, setup a dialog to warn the user.
-        // Create a click listener to handle the user confirming that changes should be discarded.
         DialogInterface.OnClickListener discardButtonClickListener =
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -274,9 +274,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                         finish();
                     }
                 };
-
-        // Show dialog that there are unsaved changes
-        showUnsavedChangesDialog(discardButtonClickListener);
+   showUnsavedChangesDialog(discardButtonClickListener);
     }
 
     @Override
@@ -302,13 +300,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     @Override
     public void onLoadFinished(android.content.Loader<Cursor> loader, Cursor cursor) {
-        // Bail early if the cursor is null or there is less than 1 row in the cursor
+
         if (cursor == null || cursor.getCount() < 1) {
             return;
         }
-
-        // Proceed with moving to the first row of the cursor and reading data from it
-        // (This should be the only row in the cursor)
         if (cursor.moveToFirst()) {
 
             int nameColumnIndex = cursor.getColumnIndex(EmployeeEntry.COLUMN_PRODUCT_NAME);
@@ -317,14 +312,12 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             int supnameColumnIndex = cursor.getColumnIndex(EmployeeEntry.COLUMN_SUPPLIER_NAME);
             int supcontactColumIndex = cursor.getColumnIndex(EmployeeEntry.COLUMN_SUPPLIER_CONTACT);
 
-            // Extract out the value from the Cursor for the given column index
             String name = cursor.getString(nameColumnIndex);
             int price = cursor.getInt(priceColumnIndex);
             int quantity = cursor.getInt(qunatityColumnIndex);
             String supName = cursor.getString(supnameColumnIndex);
             String supContact = cursor.getString(supcontactColumIndex);
 
-            // Update the views on the screen with the values from the database
             mEditProductName.setText(name);
             mEditPrice.setText(Integer.toString(price));
             mEditQuantity.setText(Integer.toString(quantity));
@@ -349,47 +342,36 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     private void showUnsavedChangesDialog(
             DialogInterface.OnClickListener discardButtonClickListener) {
-        // Create an AlertDialog.Builder and set the message, and click listeners
-        // for the postivie and negative buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.unsaved_changes_dialog_msg);
         builder.setPositiveButton(R.string.discard, discardButtonClickListener);
         builder.setNegativeButton(R.string.keep_editing, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-
                 if (dialog != null) {
                     dialog.dismiss();
                 }
             }
         });
-
-        // Create and show the AlertDialog
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
 
 
     private void showDeleteConfirmationDialog() {
-        // Create an AlertDialog.Builder and set the message, and click listeners
-        // for the postivie and negative buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.delete_dialog_msg);
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-
                 deletePro();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-
                 if (dialog != null) {
                     dialog.dismiss();
                 }
             }
         });
-
-        // Create and show the AlertDialog
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
@@ -397,10 +379,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private void deletePro() {
 
         if (mCurrentProUri != null) {
-
             int rowsDeleted = getContentResolver().delete(mCurrentProUri, null, null);
-
-            // Show a toast message depending on whether or not the delete was successful.
             if (rowsDeleted == 0) {
                 // If no rows were deleted, then there was an error with the delete.
                 Toast.makeText(this, getString(R.string.editor_delete_product_failed),
@@ -411,7 +390,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                         Toast.LENGTH_SHORT).show();
             }
         }
-
         finish();
     }
 }

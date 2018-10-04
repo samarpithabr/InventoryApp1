@@ -12,15 +12,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.shara.inventoryapp1.data.EmployeeContract;
+import static android.widget.Toast.LENGTH_SHORT;
+import static android.widget.Toast.makeText;
+
 import com.example.shara.inventoryapp1.data.EmployeeContract.EmployeeEntry;
 
-import static android.widget.Toast.*;
 
 public class EmployeeCursorAdapter extends CursorAdapter {
-
     public EmployeeCursorAdapter(Context context, Cursor c) {
         super(context, c, 0 /* flags */);
     }
@@ -28,7 +27,7 @@ public class EmployeeCursorAdapter extends CursorAdapter {
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
 
-        return LayoutInflater.from(context).inflate(R.layout.list_item,parent,false);
+        return LayoutInflater.from(context).inflate(R.layout.list_item, parent, false);
     }
 
     @Override
@@ -40,33 +39,24 @@ public class EmployeeCursorAdapter extends CursorAdapter {
         TextView qunatityTextView = (TextView) view.findViewById(R.id.quantity);
         TextView suppliernameView = (TextView) view.findViewById(R.id.suppliername);
         TextView suppliercontactView = (TextView) view.findViewById(R.id.suppliercontact);
-        // Find the columns of pet attributes that we're interested in
         int nameColumnIndex = cursor.getColumnIndex(EmployeeEntry.COLUMN_PRODUCT_NAME);
         int priceColumnIndex = cursor.getColumnIndex(EmployeeEntry.COLOMN_PRICE);
         final int quantityColumnIndex = cursor.getColumnIndex(EmployeeEntry.COLUMN_QUANTITY);
         int supnameColumnIndex = cursor.getColumnIndex(EmployeeEntry.COLUMN_SUPPLIER_NAME);
         int supcontactColumnIndex = cursor.getColumnIndex(EmployeeEntry.COLUMN_SUPPLIER_CONTACT);
         String productName = cursor.getString(nameColumnIndex);
-        int productPrice =cursor.getInt(priceColumnIndex);
-        int productQuantity =cursor.getInt(quantityColumnIndex);
-        //Toast.makeText(EmployeeCursorAdapter.this,productPrice, LENGTH_SHORT).show();
-        Log.d("EmployeeCursorAdapter",priceColumnIndex+": value of price from database");
-        Log.d("EmployeeCursorAdapter",productPrice+": value of price from database after converting int");
-        String supplierName =cursor.getString(supnameColumnIndex);
-        String suplierContact =cursor.getString(supcontactColumnIndex);
+        int productPrice = cursor.getInt(priceColumnIndex);
+        int productQuantity = cursor.getInt(quantityColumnIndex);
+        String supplierName = cursor.getString(supnameColumnIndex);
+        String suplierContact = cursor.getString(supcontactColumnIndex);
         nameTextView.setText(productName);
         priceTextView.setText(Integer.toString(productPrice));
         qunatityTextView.setText(Integer.toString(productQuantity));
         suppliernameView.setText(supplierName);
         suppliercontactView.setText(suplierContact);
-
         String quantityString = cursor.getString(quantityColumnIndex);
         final int currentQuantity = Integer.valueOf(quantityString);
         final int itemId = cursor.getInt(cursor.getColumnIndex(EmployeeEntry._ID));
-
-
-        // Setting up "sale" functionality, where the quantity is decreased by 1
-        // and updated using CONTENT_URI and ContentValues.
         slebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,12 +71,12 @@ public class EmployeeCursorAdapter extends CursorAdapter {
                             null);
 
                 } else {
-                    makeText(context, "quantity cannot be zero",
+                    makeText(context, R.string.quantity_zero,
                             LENGTH_SHORT).show();
                 }
             }
         });
-}
     }
+}
 
 

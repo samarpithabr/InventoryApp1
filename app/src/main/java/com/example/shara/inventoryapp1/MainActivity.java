@@ -1,4 +1,5 @@
 package com.example.shara.inventoryapp1;
+
 import android.app.LoaderManager;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
 import com.example.shara.inventoryapp1.data.EmployeeContract.EmployeeEntry;
 import com.example.shara.inventoryapp1.data.EmployeedbHelper;
 
@@ -25,7 +27,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private EmployeedbHelper mDbHelper;
     private static final int Employer_LOADER = 0;
     EmployeeCursorAdapter mCursorAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +41,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
         ListView proListView = (ListView) findViewById(R.id.list);
-
-        // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
         View emptyView = findViewById(R.id.empty_view);
         proListView.setEmptyView(emptyView);
-
         mCursorAdapter = new EmployeeCursorAdapter(this, null);
         proListView.setAdapter(mCursorAdapter);
 
-        // Setup the item click listener
         proListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -60,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
-        // Kick off the loader
         getLoaderManager().initLoader(Employer_LOADER, null, this);
     }
 
@@ -82,8 +78,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu options from the res/menu/menu_catalog.xml file.
-        // This adds menu items to the app bar.
         getMenuInflater().inflate(R.menu.menu_catalog, menu);
         return true;
     }
@@ -92,11 +86,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public boolean onOptionsItemSelected(MenuItem item) {
         // User clicked on a menu option in the app bar overflow menu
         switch (item.getItemId()) {
-            // Respond to a click on the "Insert dummy data" menu option
             case R.id.action_insert_dummy_data:
                 insertPro();
                 return true;
-            // Respond to a click on the "Delete all entries" menu option
             case R.id.action_delete_all_entries:
                 deleteAllPro();
                 return true;
